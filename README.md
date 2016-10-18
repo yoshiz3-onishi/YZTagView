@@ -39,4 +39,4 @@ Mail: [trace.helloworld@gmail.com](trace.helloworld@gmail.com)
 
 ## License
 
-ShadowView is available under the [MIT License](https://github.com/bennibrightside/ShadowView/blob/master/LICENSE)
+TagView is available under the [MIT License](https://github.com/bennibrightside/ShadowView/blob/master/LICENSE)
