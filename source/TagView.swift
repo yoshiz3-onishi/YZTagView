@@ -60,7 +60,7 @@ class TagView: UIView, UITextFieldDelegate
 	convenience init( position: CGPoint, size: CGSize, options: [TagViewOptions]? = nil )
 	{
 		self.init( frame: CGRectMake( position.x, position.y, size.width, size.height ) )
-		
+
 		_basePosition = position
 		_baseSize	  = size
 
@@ -84,7 +84,7 @@ class TagView: UIView, UITextFieldDelegate
 				}
 			}
 		}
-		
+
 		_scrollView							= UIScrollView( frame: frame )
 		_scrollView.pagingEnabled			= false
 		_scrollView.frame					= CGRectMake( 0, 0, frame.width, frame.height )
@@ -92,7 +92,7 @@ class TagView: UIView, UITextFieldDelegate
 		_scrollView.layer.position			= CGPoint( x: frame.width / 2, y: frame.height / 2 )
 		_scrollView.showsVerticalScrollIndicator = false
 		self.addSubview( _scrollView )
-		
+
 		_addButton							= UIButton( frame: CGRectMake( 0, 0, 30, 30 ) )
 		_addButton.layer.anchorPoint		= CGPoint( x: 0.0, y: 0.5 )
 		_addButton.layer.position			= CGPoint( x: _outerMergine, y: _outerMergine + _addButton.frame.height / 2 )
@@ -108,11 +108,10 @@ class TagView: UIView, UITextFieldDelegate
 		_addButton.setTitleColor( _ddButtonTextColor, forState: UIControlState.Normal )
 		_addButton.setTitle( "+", forState: UIControlState.Highlighted )
 		_addButton.setTitleColor( _ddButtonTextColor, forState: UIControlState.Highlighted )
-		_addButton.setBackgroundImage( Utility.createImageFromColor( UIColor.whiteColor() ), forState: .Highlighted )
 		_addButton.addTarget( self, action: #selector( onTapAddButton ), forControlEvents: .TouchUpInside )
 		self.addSubview( _addButton )
 	}
-	
+
 	// --------------------------------------------------------------------------------------------
 	var enableEdit: Bool
 	{
@@ -143,11 +142,11 @@ class TagView: UIView, UITextFieldDelegate
 	// --------------------------------------------------------------------------------------------
 	// layout functions
 	// --------------------------------------------------------------------------------------------
-	func addTag( position: CGPoint, tagString: String )
+	func addTag( tagString: String )
 	{
 		let tagField				= UITextField( frame: CGRectMake( 0, 0, 60, 30 ) )
 		tagField.layer.anchorPoint	= CGPoint( x: 0.0, y: 0.0 )
-		tagField.layer.position		= CGPoint( x: _outerMergine + position.x, y: _outerMergine + position.y )
+		tagField.layer.position		= CGPoint( x: _outerMergine + _tagFieldMaxX, y: _outerMergine + _tagFieldMinY )
 		tagField.backgroundColor	= _tagBackgroundColor
 		tagField.textColor			= _tagTextColor
 		tagField.text				= tagString
@@ -231,13 +230,13 @@ class TagView: UIView, UITextFieldDelegate
 			_scrollView.frame = CGRectMake( 0, 0, frame.width, frame.height )
 		}
 	}
-	
+
 	// --------------------------------------------------------------------------------------------
 	// event functions
 	// --------------------------------------------------------------------------------------------
 	func onTapAddButton( sender: UIButton )
 	{
-		addTag( CGPoint( x: _tagFieldMaxX, y: _tagFieldMinY ), tagString: _tagPrefix )
+		addTag( _tagPrefix )
 	}
 	// --------------------------------------------------------------------------------------------
 	func textField( textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String ) -> Bool
@@ -273,5 +272,3 @@ class TagView: UIView, UITextFieldDelegate
 		return true
 	}
 }
-
-
